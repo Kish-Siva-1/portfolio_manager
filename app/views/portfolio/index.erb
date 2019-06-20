@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+  <h2><%= current_user.username.capitalize %>'s Investments </h2> 
+  
+  <% current_user.portfolios.each do |y| %>
+
+  <h3>  <%=y.name.split(' ').collect(&:capitalize).join(" ")%> Portfolio </h3> <h5><a href="/portfolio/<%=y.id%>/edit">Edit Portfolio</a>      <a href='/stock/new/<%=y.id%>'>Add/Edit Stocks</a> </h5> 
+    <%y.stocks.each do |x|%>
+      <%= x.name.capitalize %>
+     <%= x.weights[-1].portfolio_weight %>% <%=if !(y.stocks.last == x) then "|" end%> 
+    <%end%>
+  <%end%>
+  
+  <br>
+  <br>
+  <h4><a href='/portfolio/new'>Create A New Portfolio</a></h4>
+  <br>
+  <h4><a href='/logout'>Log Out</a></h4>
+  </div>
+</div>

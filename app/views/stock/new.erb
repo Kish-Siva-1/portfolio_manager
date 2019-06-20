@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+  <h2><%= current_user.username.capitalize %>'s Portfolio </h2>
+  
+  <h3>Add a New Stock</h3>
+  
+  <h5>Please fill out a portfolio weight for every stock.</h5>
+  
+  <form method="POST" action='/stock/new/<%=@id%>'><br>
+  
+  <%10.times do%> 
+
+    Stock Name: <input type="text" name='stock[][name]'>
+    
+    Portfolio Weight:  <input type="text" name='weight[][portfolio_weight]'>
+    
+    <br>
+    <br>
+    
+  <%end%>
+  
+  <input type="submit" value="Add Stocks">  
+  
+  </form>
+  <br>
+  
+  <a href='/stock/edit/<%=@id%>'>Edit Stocks</a>
+  <br>
+  <br>
+  <h4><a href="/portfolio"> Home </a> &nbsp; <a href='/logout'>Log Out</a></h4>
+  
+  </div>
+</div>

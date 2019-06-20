@@ -1,0 +1,44 @@
+  <div class="container">
+  <div class="col-md-8 col-md-offset-2">
+  <h2><%= current_user.username.capitalize %>'s Portfolio </h2>
+  
+  <h3>Create a New Portfolio</h3>
+  
+  <form method="POST" action='/portfolio/new'><br>
+  
+    Portfolio Name: <input type="text" name='portfolio[name]'><br><br>
+ 
+  <label>Choose an existing stock:</label>
+ 
+  <br>
+  
+  <%if @stocks.empty?%>
+    <i>No stocks in memory. Please create a new stock.</i> 
+  <br>
+  <%end%>
+  <%@stocks.each do |stock|%>
+    <input type="radio" name="portfolio[stock_ids][]" id="<%=stock.id%>" value="<%=stock.id%>"><%=stock.name%></input>
+  <%end%>
+  
+  <br>
+  <br>
+    <label>Or create a new stock:</label>
+    <br>
+    <label>Stock Name:</label>
+      <input  type="text" name="stock[name]"></input>
+  <br>
+    <label>Stock Description:</label>
+      <input  type="text" name="stock[description]"></input>
+  <br>
+  <br>
+  Portfolio Weight: <input type="text" name='weight[portfolio_weight]'>
+  <br>  
+  <br>
+  <input type="submit" value="Create Portfolio">  
+  
+  </form>
+  <br>
+  <h4><a href="/portfolio"> Home </a> &nbsp; <a href='/logout'>Log Out</a></h4>  
+    
+  </div>
+</div>

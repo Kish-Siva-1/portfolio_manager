@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+  <h2><%= current_user.username.capitalize %>'s Portfolio </h2>
+  
+  <h3>Edit Portfolio</h3>
+  
+  <form action="/portfolio/<%=@portfolio.id%>" method="POST"><br>
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  
+    Portfolio Name: <input type="text" name='portfolio[name]' value=<%= @portfolio.name %>> <br><br>
+  
+  <label>Choose an existing stock:</label>
+ 
+  <br>
+  
+  <%if @stocks.empty?%>
+    <i>No stocks in memory. Please create a new stock.</i> 
+  <br>
+  <%end%>
+  <%@stocks.each do |stock|%>
+    <input type="radio" name="portfolio[stock_ids][]" id="<%=stock.id%>" value="<%=stock.id%>" checked="checked"><%=stock.name%> </input>
+  <%end%>
+ 
+  <br>
+  <br>
+  
+  Portfolio Weight: <input type="text" name='weight[portfolio_weight]' value="<%= @portfolio.stocks.first.weights.last.portfolio_weight %>">
+  <br>
+  <br>
+  
+  <input type="submit" value="Create Portfolio">  
+  
+  </form>
+  
+  <br>
+  
+  <form action="/portfolio/<%= @portfolio.id %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Portfolio">
+  </form>
+  <br>
+  <h4><a href="/portfolio"> Home </a> &nbsp; <a href='/logout'>Log Out</a></h4>
+  
+  </div>
+</div>
