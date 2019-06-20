@@ -23,8 +23,10 @@
  
   <br>
   <br>
-  
+
+  <%if !@portfolio.stocks.empty?%>
   Portfolio Weight: <input type="text" name='weight[portfolio_weight]' value="<%= @portfolio.stocks.first.weights.last.portfolio_weight %>">
+  <%end%>
   <br>
   <br>
   
