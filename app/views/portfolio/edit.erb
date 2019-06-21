@@ -6,8 +6,8 @@
   
   <form action="/portfolio/<%=@portfolio.id%>" method="POST"><br>
   <input id="hidden" type="hidden" name="_method" value="patch">
-  
-    Portfolio Name: <input type="text" name='portfolio[name]' value=<%= @portfolio.name %>> <br><br>
+
+    Portfolio Name: <input type="text" name='portfolio[name]' maxlength='100' value=<%= @portfolio.name.tr("_"," ").to_str%>> <br><br>
   
   <label>Choose an existing stock:</label>
  

@@ -22,6 +22,7 @@ class PortfolioController < ApplicationController
   post '/portfolio/new' do 
     if logged_in?  
       if !params[:portfolio].empty?
+        params[:portfolio][:name].tr!(" ","_")
         portfolio = current_user.portfolios.create(params[:portfolio])
         if !params[:stock][:name].empty?
           Stock.create(params[:stock]).weights.create(params[:weight])
@@ -58,8 +59,10 @@ class PortfolioController < ApplicationController
     if logged_in?  
       if !params[:portfolio][:name].empty?
         @portfolio = Portfolio.find(params[:id])
-        @portfolio.update(params[:portfolio]) 
-        @portfolio.stocks.last.weights.first.update(params[:weight])
+        @stock = Stock.find(params[:portfolio][:stock_ids])[0]
+        @portfolio.stocks.first.update(name: @stock.name, description: @stock.description)
+        @portfolio.stocks.first.weights.first.update(params[:weight])
+        @portfolio.update(name: params[:portfolio][:name])
       end 
         erb :"/portfolio/index"
     else 
