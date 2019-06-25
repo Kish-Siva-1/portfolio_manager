@@ -8,8 +8,8 @@
 
   <form method="POST" action='/stock/<%=@id%>'><br>
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <%if !current_user.portfolios.find(@id).stocks.empty?%>
-  <%current_user.portfolios.find(@id).stocks.each_with_index do |x,index|%> 
+  <%if !@portfolio.stocks.empty?%>
+  <%@portfolio.stocks.each_with_index do |x,index|%> 
     
     Stock Name: <input type="text" name='stock[][name]' value=<%=x.name%>>
     

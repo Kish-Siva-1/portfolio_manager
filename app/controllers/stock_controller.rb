@@ -51,7 +51,12 @@ class StockController < ApplicationController
   get '/stock/edit/:id' do
     if logged_in?
       @id = params[:id]
-      erb :"stock/edit"
+      @portfolio = current_user.portfolios.find(@id)
+      if current_user.id == @portfolio.user_id.to_i
+        erb :"stock/edit"
+      else 
+        redirect to '/login'
+      end
     else 
       redirect to '/login'
     end 
@@ -74,37 +79,38 @@ class StockController < ApplicationController
   end 
   
   patch '/stock/:id' do
-    
     @portfolio = Portfolio.find(params[:id])
-    stock_names = []
-    portfolio_weight = []
-    params.each do |x,y|
-    
-      break if x == "id" 
-      next if x == "_method"
-      n = 0
-      while n < y.length 
-        if !y[n].values[0].empty?   
-          if x == "stock"
-            stock_names << y[n]
-          elsif x == "weight" 
-            portfolio_weight << y[n]
-          end 
-        end
-        n+=1 
-      end
-    end 
-    
-    @id = params["id"]
+    if current_user.id == @portfolio.user_id.to_i
+      stock_names = []
+      portfolio_weight = []
+      params.each do |x,y|
       
-    k = 0
-    while k < stock_names.length
-      current_user.portfolios.find(@id).stocks[k].update(name: stock_names[k]["name"])
-      current_user.portfolios.find(@id).stocks[k].weights.last.update(portfolio_weight: portfolio_weight[k]["portfolio_weight"])
-      k += 1
-    end
-    
-    redirect to "/portfolio"
+        break if x == "id" 
+        next if x == "_method"
+        n = 0
+        while n < y.length 
+          if !y[n].values[0].empty?   
+            if x == "stock"
+              stock_names << y[n]
+            elsif x == "weight" 
+              portfolio_weight << y[n]
+            end 
+          end
+          n+=1 
+        end
+      end 
+      
+      @id = params["id"]
+        
+      k = 0
+      while k < stock_names.length
+        current_user.portfolios.find(@id).stocks[k].update(name: stock_names[k]["name"])
+        current_user.portfolios.find(@id).stocks[k].weights.last.update(portfolio_weight: portfolio_weight[k]["portfolio_weight"])
+        k += 1
+      end
+      
+      redirect to "/portfolio"
+    end 
   end
   
 end 
