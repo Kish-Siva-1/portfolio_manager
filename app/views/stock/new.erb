@@ -6,7 +6,9 @@
   
   <h5>Please fill out a portfolio weight for every stock.</h5>
   
-  <form method="POST" action='/stocks/<%=@id%>'><br>
+  <form method="POST" action='/stocks'><br>
+  
+  
   
   <%10.times do%> 
 
@@ -14,10 +16,14 @@
     
     Portfolio Weight:  <input type="text" name='weight[][portfolio_weight]'>
     
+    
+    
     <br>
     <br>
     
   <%end%>
+  
+  <input id="hidden" type="hidden" name="portfolio_id" value=<%=@id%>>
   
   <input type="submit" value="Add Stocks">  
   

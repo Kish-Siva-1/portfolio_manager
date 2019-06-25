@@ -10,14 +10,13 @@ class StockController < ApplicationController
     end 
   end
   
-  post '/stocks/:id' do 
+  post '/stocks' do 
     if logged_in?
       stock_names = []
       portfolio_weight = []
       params.each do |x,y|
-        break if x == "id"
         n = 0
-        while n < y.length 
+        while n < y.length && x != "portfolio_id"
           if !y[n].values[0].empty?   
             if x == "stock"
               stock_names << y[n]
@@ -25,11 +24,11 @@ class StockController < ApplicationController
               portfolio_weight << y[n]
             end 
           end
-          n+=1 
+          n+=1
         end
       end 
       
-      @id = params[:id]
+      @id = params[:portfolio_id]
       
       k = 0
       while k < stock_names.length
@@ -107,6 +106,8 @@ class StockController < ApplicationController
       end
       
       redirect to "/portfolios"
+    else 
+      redirect to "/stocks/new"
     end 
   end
   
