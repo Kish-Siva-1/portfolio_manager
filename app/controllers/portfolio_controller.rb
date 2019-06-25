@@ -25,8 +25,7 @@ class PortfolioController < ApplicationController
         params[:portfolio][:name].tr!(" ","_")
         portfolio = current_user.portfolios.create(params[:portfolio])
         if !params[:stock][:name].empty?
-          Stock.create(params[:stock]).weights.create(params[:weight])
-          portfolio.stocks << Stock.all.last
+          portfolio.stocks.create(params[:stock]).weights.create(params[:weight])
         end 
       end 
         erb :"/portfolio/index"
