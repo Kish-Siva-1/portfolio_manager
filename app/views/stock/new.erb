@@ -6,7 +6,7 @@
   
   <h5>Please fill out a portfolio weight for every stock.</h5>
   
-  <form method="POST" action='/stocks/new/<%=@id%>'><br>
+  <form method="POST" action='/stocks/<%=@id%>'><br>
   
   <%10.times do%> 
 
@@ -24,7 +24,7 @@
   </form>
   <br>
   
-  <a href='/stocks/edit/<%=@id%>'>Edit Stocks</a>
+  <a href='/stocks/<%=@id%>/edit'>Edit Stocks</a>
   <br>
   <br>
   <h4><a href="/portfolios"> Home </a> &nbsp; <a href='/logout'>Log Out</a></h4>

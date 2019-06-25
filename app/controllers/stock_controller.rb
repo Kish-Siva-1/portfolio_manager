@@ -1,6 +1,6 @@
 class StockController < ApplicationController
   
-  get '/stocks/new/:id' do
+  get '/stocks/:id' do
     if logged_in?
       @stocks = Stock.all
       @id = params[:id]
@@ -10,7 +10,7 @@ class StockController < ApplicationController
     end 
   end
   
-  post '/stocks/new/:id' do 
+  post '/stocks/:id' do 
     if logged_in?
       stock_names = []
       portfolio_weight = []
@@ -48,7 +48,7 @@ class StockController < ApplicationController
     end
   end
   
-  get '/stocks/edit/:id' do
+  get '/stocks/:id/edit' do
     if logged_in?
       @id = params[:id]
       @portfolio = current_user.portfolios.find(@id)
