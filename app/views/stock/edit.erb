@@ -6,7 +6,7 @@
   
   <h5>Please fill out a portfolio weight for every stock.</h5>
 
-  <form method="POST" action='/stock/<%=@id%>'><br>
+  <form method="POST" action='/stocks/<%=@id%>'><br>
   <input id="hidden" type="hidden" name="_method" value="patch">
   <%if !@portfolio.stocks.empty?%>
   <%@portfolio.stocks.each_with_index do |x,index|%> 
@@ -15,23 +15,23 @@
     
     Portfolio Weight:  <input type="text" name='weight[][portfolio_weight]' value=<%=x.weights.first.portfolio_weight%>>
 
-    <font size="-1"><a href="/stock/<%=@id%>/<%=index%>/delete">Delete Stock</a></font>
+    <font size="-1"><a href="/stocks/<%=@id%>/<%=index%>/delete">Delete Stock</a></font>
     
     <br>
     <br>
 
   <%end%>
   
-  <input type="submit" value="Edit Stocks">  
+  <input type="submit" value="Submit">  
   
   <%else%>
-    This portfolio does not have any stocks. Please click here to add new stocks. <a href="/stock/new/<%=@id%>">Add New Stocks</a>
+    This portfolio does not have any stocks. Please click here to add new stocks. <a href="/stocks/new/<%=@id%>">Add New Stocks</a>
   <%end%>
   
   </form>
   <br>
 
-  <h4><a href="/portfolio"> Home </a> &nbsp; <a href='/logout'>Log Out</a></h4>  
+  <h4><a href="/portfolios"> Home </a> &nbsp; <a href='/logout'>Log Out</a></h4>  
     
   </div>
 </div>

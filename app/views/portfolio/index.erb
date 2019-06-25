@@ -4,7 +4,7 @@
   
   <% current_user.portfolios.each do |y| %>
 
-  <h3>  <%=y.name.split('_').collect(&:capitalize).join(" ")%> Portfolio </h3> <h5><a href="/portfolio/<%=y.id%>/edit">Edit Portfolio</a>      <a href='/stock/new/<%=y.id%>'>Add/Edit Stocks</a> </h5> 
+  <h3>  <%=y.name.split('_').collect(&:capitalize).join(" ")%> Portfolio </h3> <h5><a href="/portfolios/<%=y.id%>/edit">Edit Portfolio</a>      <a href='/stocks/new/<%=y.id%>'>Add/Edit Stocks</a> </h5> 
     <%y.stocks.each do |x|%>
       <%= x.name.capitalize %>
      <%= x.weights[-1].portfolio_weight %>% <%=if !(y.stocks.last == x) then "|" end%> 
@@ -13,7 +13,7 @@
   
   <br>
   <br>
-  <h4><a href='/portfolio/new'>Create A New Portfolio</a></h4>
+  <h4><a href='/portfolios/new'>Create A New Portfolio</a></h4>
   <br>
   <h4><a href='/logout'>Log Out</a></h4>
   </div>

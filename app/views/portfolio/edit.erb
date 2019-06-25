@@ -4,7 +4,7 @@
   
   <h3>Edit Portfolio</h3>
   
-  <form action="/portfolio/<%=@portfolio.id%>" method="POST"><br>
+  <form action="/portfolios/<%=@portfolio.id%>" method="POST"><br>
   <input id="hidden" type="hidden" name="_method" value="patch">
 
     Portfolio Name: <input type="text" name='portfolio[name]' maxlength='100' value=<%= @portfolio.name.tr("_"," ").to_str%>> <br><br>
@@ -36,12 +36,12 @@
   
   <br>
   
-  <form action="/portfolio/<%= @portfolio.id %>/delete" method="post">
+  <form action="/portfolios/<%= @portfolio.id %>/delete" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete Portfolio">
   </form>
   <br>
-  <h4><a href="/portfolio"> Home </a> &nbsp; <a href='/logout'>Log Out</a></h4>
+  <h4><a href="/portfolios"> Home </a> &nbsp; <a href='/logout'>Log Out</a></h4>
   
   </div>
 </div>

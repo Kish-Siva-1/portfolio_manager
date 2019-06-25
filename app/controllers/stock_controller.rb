@@ -1,6 +1,6 @@
 class StockController < ApplicationController
   
-  get '/stock/new/:id' do
+  get '/stocks/new/:id' do
     if logged_in?
       @stocks = Stock.all
       @id = params[:id]
@@ -10,7 +10,7 @@ class StockController < ApplicationController
     end 
   end
   
-  post '/stock/new/:id' do 
+  post '/stocks/new/:id' do 
     if logged_in?
       stock_names = []
       portfolio_weight = []
@@ -48,7 +48,7 @@ class StockController < ApplicationController
     end
   end
   
-  get '/stock/edit/:id' do
+  get '/stocks/edit/:id' do
     if logged_in?
       @id = params[:id]
       @portfolio = current_user.portfolios.find(@id)
@@ -62,23 +62,23 @@ class StockController < ApplicationController
     end 
   end
   
-  get '/stock/:port/:id/delete' do
+  get '/stocks/:port/:id/delete' do
     if logged_in? 
       @stock = Portfolio.find(params[:port]).stocks[params[:id].to_i]
       @portfolio = Portfolio.find(params[:port])
       if current_user.id == @portfolio.user_id.to_i
         @id = params[:port]
         @stock.delete
-        redirect to "stock/edit/#{@id}"
+        redirect to "stocks/edit/#{@id}"
       else 
-        redirect to "/portfolio/#{current_user.id}/edit"
+        redirect to "/portfolios/#{current_user.id}/edit"
       end 
     else 
       redirect to '/login'
     end
   end 
   
-  patch '/stock/:id' do
+  patch '/stocks/:id' do
     @portfolio = Portfolio.find(params[:id])
     if current_user.id == @portfolio.user_id.to_i
       stock_names = []
@@ -109,7 +109,7 @@ class StockController < ApplicationController
         k += 1
       end
       
-      redirect to "/portfolio"
+      redirect to "/portfolios"
     end 
   end
   

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   get '/signup' do 
     if logged_in? 
-      redirect to '/portfolio'
+      redirect to '/portfolios'
     else
       erb :'users/create_user'
     end
@@ -13,18 +13,18 @@ class UsersController < ApplicationController
       @user = User.new(params)
       if @user.save 
         session[:user_id] = @user.id
-        redirect to '/portfolio'
+        redirect to '/portfolios'
       else 
         redirect to '/signup'
       end
     else 
-      redirect to '/portfolio'
+      redirect to '/portfolios'
     end 
   end
   
   get '/login' do 
     if logged_in?
-      redirect to '/portfolio'
+      redirect to '/portfolios'
     else 
       erb :'users/login'
     end 
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     user = User.find_by(username: params[:username])
     if user.authenticate(params[:password]) && (user.username == params[:username]) 
       session[:user_id] = user.id
-      redirect to '/portfolio'
+      redirect to '/portfolios'
     end
   end
   

@@ -1,6 +1,6 @@
 class PortfolioController < ApplicationController
   
-  get '/portfolio' do 
+  get '/portfolios' do 
     if logged_in?
       @portfolios = Portfolio.all
       erb :"/portfolio/index"
@@ -9,7 +9,7 @@ class PortfolioController < ApplicationController
     end 
   end 
   
-  get '/portfolio/new' do 
+  get '/portfolios/new' do 
     if logged_in?
       @stocks = current_user.portfolios.collect{|x| x.stocks.collect{|y| y}}.flatten
       @portfolios = Portfolio.all
@@ -19,7 +19,7 @@ class PortfolioController < ApplicationController
     end 
   end 
   
-  post '/portfolio/new' do 
+  post '/portfolios' do 
     if logged_in?  
       if !params[:portfolio].empty?
         params[:portfolio][:name].tr!(" ","_")
@@ -36,7 +36,7 @@ class PortfolioController < ApplicationController
     
   end 
   
-  get '/portfolio/:id' do 
+  get '/portfolios/:id' do 
     @portfolio = Portfolio.find(params[:id])
     if logged_in?
       erb :'portfolio/show'
@@ -45,7 +45,7 @@ class PortfolioController < ApplicationController
     end 
   end
   
-  get '/portfolio/:id/edit' do 
+  get '/portfolios/:id/edit' do 
     if logged_in?
       @portfolio = Portfolio.find(params[:id])
       @stocks = current_user.portfolios.collect{|x| x.stocks.collect{|y| y}}.flatten
@@ -55,7 +55,7 @@ class PortfolioController < ApplicationController
     end 
   end
   
-  patch '/portfolio/:id' do
+  patch '/portfolios/:id' do
     if logged_in?  
       if !params[:portfolio][:name].empty?
         @portfolio = Portfolio.find(params[:id])
@@ -70,14 +70,14 @@ class PortfolioController < ApplicationController
     end
   end
   
-  delete '/portfolio/:id/delete' do
+  delete '/portfolios/:id/delete' do
     if logged_in? 
       @portfolio = Portfolio.find(params[:id])
       if current_user.id == @portfolio.user_id.to_i
         @portfolio.delete
-        redirect to "/portfolio"
+        redirect to "/portfolios"
       else 
-        redirect to "/portfolio/#{current_user.id}/edit"
+        redirect to "/portfolios/#{current_user.id}/edit"
       end 
     else 
       redirect to '/login'
