@@ -70,7 +70,7 @@ class PortfolioController < ApplicationController
     end
   end
   
-  delete '/portfolios/:id/delete' do
+  delete '/portfolios/:id' do
     if logged_in? 
       @portfolio = Portfolio.find(params[:id])
       if current_user.id == @portfolio.user_id.to_i

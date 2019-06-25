@@ -62,14 +62,14 @@ class StockController < ApplicationController
     end 
   end
   
-  get '/stocks/:port/:id/delete' do
+  get '/stocks/:port/:id' do
     if logged_in? 
       @stock = Portfolio.find(params[:port]).stocks[params[:id].to_i]
       @portfolio = Portfolio.find(params[:port])
       if current_user.id == @portfolio.user_id.to_i
         @id = params[:port]
         @stock.delete
-        redirect to "stocks/edit/#{@id}"
+        redirect to "stocks/#{@id}/edit"
       else 
         redirect to "/portfolios/#{current_user.id}/edit"
       end 
