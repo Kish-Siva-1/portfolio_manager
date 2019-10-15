@@ -1,16 +1,32 @@
-# Portfolio_Manager
+# Portfolio Manager
 
-The Portfolio Manager is designed to allow the user to input information about the their investment portfolio and the weight that they want to associate with that stock within their portfolio. The user is able to perform CRUD actions such as create, read, update and destroy on the portfolio and stocks. 
+The Portfolio Manager is designed to allow the user to track information about their investment portfolio including the weight of the stock  within their portfolio and details about the stock. The user is also able to perform CRUD actions such as create, read, update and destroy on the portfolio and stocks. 
 
 ## Installation
 
-Fork the code onto your github page and clone it onto your local environment. 
+Clone this Github repository by entering the following command in your terminal:
+
+`git clone git@github.com:Kish-Siva-1/portfolio_manager.git`
+
+Change directories to the cloned directory:
+
+`cd portfolio_manager`
+
+Install the required gems:
+
+`bundle install`
+
+Spool up the server in your web browser:
+
+`rails s`
+
+Navigate to `localhost:3000` in browser and begin using the app.
 
 ## Usage
 
 Type the below and follow the on screen prompts.
 
-  shotgun
+  `shotgun`
 
 ## Development
 
