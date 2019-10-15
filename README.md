@@ -18,15 +18,9 @@ Install the required gems:
 
 Spool up the server in your web browser:
 
-`rails s`
+`shotgun`
 
 Navigate to `localhost:3000` in browser and begin using the app.
-
-## Usage
-
-Type the below and follow the on screen prompts.
-
-  `shotgun`
 
 ## Development
 
